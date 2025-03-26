@@ -1,0 +1,53 @@
+{
+  "name": "code-connect-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@monaco-editor/react": "^4.6.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@vendia/serverless-express": "^4.12.6",
+    "add": "^2.0.6",
+    "aws-lambda": "^1.0.7",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.436.0",
+    "next": "14.2.6",
+    "next-auth": "^4.24.10",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
+    "react-markdown": "^8.0.7",
+    "react-redux": "^9.1.2",
+    "react-split": "^2.0.14",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-toastify": "^10.0.6",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^3.0.1",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7",
+    "yarn": "^1.22.22",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.148",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.6",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
