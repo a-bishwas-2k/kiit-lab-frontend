@@ -1,43 +1,53 @@
 "use client"
 import React, { useState } from 'react';
-import { Search, Plus, Filter, Sidebar } from 'lucide-react';
+import { Search, Plus, Filter, Sidebar, CloudCog } from 'lucide-react';
 import AddProblemModal from '@/components/Problems/AddProblemModel';
 import ProblemPreview from './ProblemView';
 import { toast } from 'react-toastify';
-import { deleteProblem } from '@/ServerActions/actions';
+import { deleteProblem, viewProblem } from '@/ServerActions/actions';
 import { updateToast } from '@/utils/tostify';
+import { useSession } from 'next-auth/react';
 
-function ProblemsPage({data}:{
-    data:{
-        id: string;
-        title: string;
-        description: string;
-        difficulty: string;
-        category: string;
-        status: string;
-    }[]
+function ProblemsPage({ data }: {
+  data: {
+    id: string;
+    title: string;
+    description: string;
+    difficulty: string;
+    category: string;
+    status: string;
+  }[]
 }) {
+  const { data: session } = useSession();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [currentProblemId,setCurrentProblemId] = useState<string|null>(null);
+  const [currentProblemId, setCurrentProblemId] = useState<string | null>(null);
+  const [viewSubmission, setViewSubmission] = useState<any>(null);
 
-  const onDeleteProblem = async(problemId:string)=>{
+  const onViewProblem = async (problemId: string) => {
+    if (!problemId) return toast.error("Invalid Problem Id");
+    const toastId = toast("Viewing Problem..");
 
-    if(!problemId) return toast.error("Invalid Problem Id");
+    const status = await viewProblem(problemId, session?.id as string);
+    setViewSubmission(status);
+  }
+
+  const onDeleteProblem = async (problemId: string) => {
+
+    if (!problemId) return toast.error("Invalid Problem Id");
     const toastId = toast("Deleting Problem..");
 
     const status = await deleteProblem(problemId);
-    if(status === 200){
-     return updateToast(toastId,"Problem Deleted Successfully","success");
+    if (status === 200) {
+      return updateToast(toastId, "Problem Deleted Successfully", "success");
     }
 
-    return updateToast(toastId,"Failed to delete problem","error");
-
-  
+    return updateToast(toastId, "Failed to delete problem", "error");
   }
   return (
-<div className='w-full h-full '>
-      
+    <div className='w-full h-full '>
+
       <main className="flex-1 overflow-y-auto ">
         <div className="p-8">
           <div className="flex items-center justify-between mb-8">
@@ -51,7 +61,7 @@ function ProblemsPage({data}:{
                   className="pl-10 pr-4 py-2 rounded-[5px] border bg-transparent border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
@@ -83,7 +93,7 @@ function ProblemsPage({data}:{
                     <th className="text-left py-3 px-4 text-sm font-bold text-gray-200">Difficulty</th>
                     <th className="text-left py-3 px-4 text-sm font-bold text-gray-200">Category</th>
                     <th className="text-left py-3 px-4 text-sm font-bold text-gray-200">Status</th>
-                    <th className="text-left py-3 px-4 text-sm font-bold text-gray-200">Actions</th>
+                    <th colSpan={2} className="text-center text-sm font-bold text-gray-200 ">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -94,13 +104,12 @@ function ProblemsPage({data}:{
                       </td>
                       <td className="py-3 px-4">
                         <span
-                          className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                            problem.difficulty === 'Easy'
-                              ? 'bg-green-100 text-green-700'
-                              : problem.difficulty === 'Medium'
+                          className={`px-2.5 py-1 rounded-full text-xs font-medium ${problem.difficulty === 'Easy'
+                            ? 'bg-green-100 text-green-700'
+                            : problem.difficulty === 'Medium'
                               ? 'bg-yellow-100 text-yellow-700'
                               : 'bg-red-100 text-red-700'
-                          }`}
+                            }`}
                         >
                           {problem.difficulty}
                         </span>
@@ -108,21 +117,27 @@ function ProblemsPage({data}:{
                       <td className="py-3 px-4">
                         <span className="text-gray-400">{problem.category}</span>
                       </td>
-                     
+
                       <td className="py-3 px-4">
                         <span
-                          className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                            problem.status === 'Active'
-                              ? 'bg-blue-100 text-blue-700'
-                              : 'bg-gray-100 text-gray-400'
-                          }`}
+                          className={`px-2.5 py-1 rounded-full text-xs font-medium ${problem.status === 'Active'
+                            ? 'bg-blue-100 text-blue-700'
+                            : 'bg-gray-100 text-gray-400'
+                            }`}
                         >
                           {problem.status}
                         </span>
                       </td>
 
-                       <td className="py-3 px-4">
-                        <button onClick={()=>onDeleteProblem(problem.id)} className="text-gray-200 bg-red-800 p-1 rounded-[5px]">Delete</button>
+                      <td className="text-right">
+                        <button
+                          onClick={() =>
+                            onViewProblem(problem.id)
+                          }
+                          className="text-gray-200 p-1 bg-green-800 rounded-[5px]">View</button>
+                      </td>
+                      <td className="text-center">
+                        <button onClick={() => onDeleteProblem(problem.id)} className="text-gray-200 p-1 bg-red-800 rounded-[5px]">Delete</button>
                       </td>
                     </tr>
                   ))}
@@ -133,14 +148,20 @@ function ProblemsPage({data}:{
         </div>
       </main>
 
+      {viewSubmission?.code && (
+        <pre className="p-4 rounded-xl overflow-x-auto text-sm">
+          <code>{viewSubmission.code}</code>
+        </pre>
+      )}
+
       <AddProblemModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={()=>{}}
+        onSubmit={() => { }}
       />
 
       {
-        currentProblemId && <ProblemPreview onClose={()=>setCurrentProblemId(null)} problemId={currentProblemId} />
+        currentProblemId && <ProblemPreview onClose={() => setCurrentProblemId(null)} problemId={currentProblemId} />
       }
     </div>
   );

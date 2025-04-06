@@ -12,7 +12,7 @@ import { loadToast, updateToast } from '@/utils/tostify';
 
 
 
-const Playground = ({ executionFunction, functionSignature, problemId, testCases, description,language }: {
+const Playground = ({ executionFunction, functionSignature, problemId, testCases, description, language }: {
     executionFunction: string
     problemId: string;
 
@@ -25,7 +25,7 @@ const Playground = ({ executionFunction, functionSignature, problemId, testCases
         output: undefined | string
 
     }[]
-    language:string
+    language: string
 }) => {
 
     const [TestCase, setTestCase] = useState<{
@@ -71,7 +71,7 @@ const Playground = ({ executionFunction, functionSignature, problemId, testCases
         // const newTestCase = []
         console.log("tcase", tCases);
 
-        updateToast(toastId, getStatusMapToMessage(res.status.id), res.status.id == 3 ? "success" :"error");
+        updateToast(toastId, getStatusMapToMessage(res.status.id), res.status.id == 3 ? "success" : "error");
 
         if (tCases?.length > 0) {
             const newT = testCases.map((t, i) => {

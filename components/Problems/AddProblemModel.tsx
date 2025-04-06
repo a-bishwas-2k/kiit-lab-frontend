@@ -121,22 +121,22 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
     //     name: 'solutions',
     // });
 
-    const onFormSubmit =async (data: ProblemFormData) => {
+    const onFormSubmit = async (data: ProblemFormData) => {
         console.log("hello", data);
         // onSubmit(data);
 
         const toastId = loadToast("Adding Question..");
         const status = await addQuestion(data);
 
-        if(status === 201){
+        if (status === 201) {
             updateToast(toastId, "Question Added Successfully", "success");
             // form.reset();
             onClose();
         }
-        else{
+        else {
             updateToast(toastId, "Failed to add Question", "error");
         }
-     
+
     };
 
     if (!isOpen) return null;
@@ -155,8 +155,6 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                         </button>
                     </div>
                 </div>
-
-
 
                 <Form {...form}>
                     <form
@@ -192,7 +190,7 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                         />
 
                         <FormField
-                        
+
                             control={form.control}
                             name="description"
                             render={({ field }) => (
@@ -206,54 +204,54 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                             )}
                         />
 
-                        
-       <div className='grid grid-cols-2 gap-2'>
-       <FormField
-            control={form.control}
-            name="difficulty"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Difficulty Level</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Difficulty Level" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Easy">Easy</SelectItem>
-                    <SelectItem value="Medium">Medium</SelectItem>
-                    <SelectItem value="Hard">Hard</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription>Select difficulty Level</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
+                        <div className='grid grid-cols-2 gap-2'>
+                            <FormField
+                                control={form.control}
+                                name="difficulty"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Difficulty Level</FormLabel>
+                                        <Select
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                        >
+                                            <FormControl>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Select Difficulty Level" />
+                                                </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
+                                                <SelectItem value="Easy">Easy</SelectItem>
+                                                <SelectItem value="Medium">Medium</SelectItem>
+                                                <SelectItem value="Hard">Hard</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>Select difficulty Level</FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+                            <FormField
+                                control={form.control}
+                                name="category"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Category</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Category" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+
+                            />
+
+                        </div>
 
                         <FormField
-                            control={form.control}
-                            name="category"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Category</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Category" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-
-                        />
-
-       </div>
-
-       <FormField
                             control={form.control}
                             name="language"
                             render={({ field }) => (
@@ -282,70 +280,70 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
 
 
 
-       <div className="flex items-center justify-between">
-                    <FormLabel className="text-sm font-medium">Test Cases</FormLabel>
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => appendTestCase({ input: "", expectedOutput: ""})}
-                        className="flex items-center gap-1"
-                    >
-                        <Plus className="h-4 w-4" />
-                        Add Test Case
-                    </Button>
-                </div>
+                        <div className="flex items-center justify-between">
+                            <FormLabel className="text-sm font-medium">Test Cases</FormLabel>
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => appendTestCase({ input: "", expectedOutput: "" })}
+                                className="flex items-center gap-1"
+                            >
+                                <Plus className="h-4 w-4" />
+                                Add Test Case
+                            </Button>
+                        </div>
 
-                <div className="space-y-4">
-                    {testCaseFields.map((field, index) => (
-                        <Card key={field.id} className="p-4">
-                            <CardHeader className="flex flex-row items-center justify-between">
-                                <CardTitle className="text-sm font-medium">
-                                    Test Case #{index + 1}
-                                </CardTitle>
-                                {index > 0 && (
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => removeTestCase(index)}
-                                        className="text-red-500 hover:text-red-600"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
-                                )}
-                            </CardHeader>
-                            <CardContent className="space-y-3">
-                                <FormField
-                                    control={control}
-                                    name={`testCases.${index}.input`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Input</FormLabel>
-                                            <FormControl>
-                                                <Textarea placeholder="Input" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={control}
-                                    name={`testCases.${index}.expectedOutput`}
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Output</FormLabel>
-                                            <FormControl>
-                                                <Textarea placeholder="Output" {...field} />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
-                             
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-                      
+                        <div className="space-y-4">
+                            {testCaseFields.map((field, index) => (
+                                <Card key={field.id} className="p-4">
+                                    <CardHeader className="flex flex-row items-center justify-between">
+                                        <CardTitle className="text-sm font-medium">
+                                            Test Case #{index + 1}
+                                        </CardTitle>
+                                        {index > 0 && (
+                                            <Button
+                                                type="button"
+                                                variant="ghost"
+                                                size="icon"
+                                                onClick={() => removeTestCase(index)}
+                                                className="text-red-500 hover:text-red-600"
+                                            >
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        )}
+                                    </CardHeader>
+                                    <CardContent className="space-y-3">
+                                        <FormField
+                                            control={control}
+                                            name={`testCases.${index}.input`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Input</FormLabel>
+                                                    <FormControl>
+                                                        <Textarea placeholder="Input" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={control}
+                                            name={`testCases.${index}.expectedOutput`}
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Output</FormLabel>
+                                                    <FormControl>
+                                                        <Textarea placeholder="Output" {...field} />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+
 
 
                         <FormField
@@ -358,7 +356,7 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                                         {/* <Input placeholder="Function signature here" {...field} /> */}
 
                                         <Editor
-                                        // className=''
+                                            // className=''
                                             height="20vh"
                                             onChange={field.onChange}
                                             value={field.value}
@@ -367,7 +365,7 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
 
                                             theme='vs-dark'
 
-                                            
+
 
                                         />
                                     </FormControl>
@@ -375,10 +373,10 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                                     <FormMessage />
                                 </FormItem>
                             )}
-                        /> 
-                        
-                      
-                       
+                        />
+
+
+
 
 
 
@@ -397,7 +395,7 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
                             )}
                         /> */}
 
-                     
+
 
 
 
@@ -433,7 +431,7 @@ const AddProblemModal: React.FC<AddProblemModalProps> = ({ isOpen, onClose, onSu
 
 
 
-<FormField
+                        <FormField
                             control={form.control}
                             name="status"
                             render={({ field }) => (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { X, Users, Trophy, Clock, BarChart2 } from 'lucide-react';
+import { X, Users,  Clock, BarChart2 } from 'lucide-react';
 import { previewProblem } from '@/ServerActions/actions';
+import Image from 'next/image';
 
 
 const completedUsers = [
@@ -106,7 +107,7 @@ export default function ProblemPreview({ problemId, onClose }: {
               <div className="flex flex-wrap gap-4">
                 {completedUsers.map(user => (
                   <div key={user.id} className="flex items-center space-x-2">
-                    <img
+                    <Image
                       src={user.avatar}
                       alt={user.name}
                       className="w-8 h-8 rounded-full"

@@ -3,9 +3,9 @@
 import { revalidateTag } from "next/cache";
 
 
-export const addQuestion = async(question:any)=>{
+export const addQuestion = async (question: any) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/createProblem`,{
+        const res = await fetch(`${process.env.SERVER_URL}/app/createProblem`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -15,25 +15,25 @@ export const addQuestion = async(question:any)=>{
 
         console.log(res.status);
 
-        if(res.ok){
+        if (res.ok) {
             revalidateTag("getProblems");
         }
 
         return res.status;
     } catch (error) {
-      console.log(error);
+        console.log(error);
         return 500;
     }
 }
 
 
-export const runCode = async(data:{
-    code:string;
-    languageCode:string;
-    problemId:string;
-})=>{
+export const runCode = async (data: {
+    code: string;
+    languageCode: string;
+    problemId: string;
+}) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/runCode`,{
+        const res = await fetch(`${process.env.SERVER_URL}/app/runCode`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +41,7 @@ export const runCode = async(data:{
             body: JSON.stringify(data)
         });
 
-        if(res.ok){
+        if (res.ok) {
             const data = await res.json();
             console.log(data);
             return data;
@@ -56,14 +56,14 @@ export const runCode = async(data:{
 
 }
 
-export const submitCode = async(data:{
-    code:string;
-    languageCode:string;
-    problemId:string;
-    userId:string
-})=>{
+export const submitCode = async (data: {
+    code: string;
+    languageCode: string;
+    problemId: string;
+    userId: string
+}) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/submitCode`,{
+        const res = await fetch(`${process.env.SERVER_URL}/app/submitCode`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -71,18 +71,18 @@ export const submitCode = async(data:{
             body: JSON.stringify(data)
         });
 
-        if(res.ok){
+        if (res.ok) {
             const data = await res.json();
             console.log(data);
             return {
-                data:data,
-                status:res.status
+                data: data,
+                status: res.status
             };
         }
 
         return {
-            status:res.status,
-            data:null
+            status: res.status,
+            data: null
         };
 
         // if(res.ok){
@@ -96,25 +96,47 @@ export const submitCode = async(data:{
     } catch (error) {
         console.log(error);
         return {
-            status:500,
-            data:null
+            status: 500,
+            data: null
         };
     }
 
-    
+
 
 }
 
-export const previewProblem = async(problemId:string)=>{
+export const previewProblem = async (problemId: string) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/getProblemsPreview?problemId=${problemId}`,{
+        const res = await fetch(`${process.env.SERVER_URL}/app/getProblemsPreview?problemId=${problemId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
-        if(res.ok){
+        if (res.ok) {
+            const data = await res.json();
+            console.log("! ", data);
+            return data;
+        }
+
+        return null;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+export const viewProblem = async (problemId: string, userId: string) => {
+    try {
+        const res = await fetch(`${process.env.SERVER_URL}/app/getSubmissionById?submissionId=${problemId}&userId=${userId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (res.ok) {
             const data = await res.json();
             return data;
         }
@@ -126,17 +148,16 @@ export const previewProblem = async(problemId:string)=>{
     }
 }
 
-
-export const deleteProblem = async(problemId:string)=>{
+export const deleteProblem = async (problemId: string) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/deleteProblem?problemId=${problemId}`,{
+        const res = await fetch(`${process.env.SERVER_URL}/app/deleteProblem?problemId=${problemId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
-        if(res.ok){
+        if (res.ok) {
             revalidateTag("getProblems");
         }
 

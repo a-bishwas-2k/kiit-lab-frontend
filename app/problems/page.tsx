@@ -11,8 +11,6 @@ const page = async ({
 }: {
     searchParams: { problemId: string }
 }) => {
-
-
     const session = await getServerSession(authOption);
     if (!session) return redirect("/auth/login");
     if (!searchParams.problemId) return null;
