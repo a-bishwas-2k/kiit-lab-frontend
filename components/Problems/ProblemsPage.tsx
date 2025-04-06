@@ -29,7 +29,7 @@ function ProblemsPage({ data }: {
     if (!problemId) return toast.error("Invalid Problem Id");
     const toastId = toast("Viewing Problem..");
 
-    const status = await viewProblem(problemId, session?.id as string);
+    const status = await viewProblem(problemId);
     setViewSubmission(status);
   }
 
@@ -148,11 +148,19 @@ function ProblemsPage({ data }: {
         </div>
       </main>
 
-      {viewSubmission?.code && (
-        <pre className="p-4 rounded-xl overflow-x-auto text-sm">
-          <code>{viewSubmission.code}</code>
-        </pre>
-      )}
+      {viewSubmission && viewSubmission.map((submission: any) => (
+        <div key={submission.id} className="p-4 border-b-2 border-gray-700 space-y-2">
+          <div className="text-sm text-gray-400">
+            <p><strong>User:</strong> {submission.user?.name} ({submission.user?.email})</p>
+            <p><strong>Status:</strong> {submission.status}</p>
+            <p><strong>Passed Test Cases:</strong> {submission.noOfTestCasesPassed}</p>
+            <p><strong>Submitted At:</strong> {new Date(submission.createdAt).toLocaleString()}</p>
+          </div>
+          <pre className="overflow-x-auto text-sm bg-gray-900 text-white p-4 rounded-md">
+            <code>{submission.code}</code>
+          </pre>
+        </div>
+      ))}
 
       <AddProblemModal
         isOpen={isModalOpen}

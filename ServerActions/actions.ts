@@ -127,9 +127,9 @@ export const previewProblem = async (problemId: string) => {
     }
 }
 
-export const viewProblem = async (problemId: string, userId: string) => {
+export const viewProblem = async (problemId: string) => {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/app/getSubmissionById?submissionId=${problemId}&userId=${userId}`, {
+        const res = await fetch(`${process.env.SERVER_URL}/app/getSubmissionById?submissionId=${problemId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

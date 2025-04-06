@@ -7,14 +7,14 @@ export const authOption: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            // authorization: {
-            //     params: {
-            //         prompt: "consent",
-            //     },
-            // },
-            // httpOptions: {
-            //     timeout: 100000,
-            // },
+            authorization: {
+                params: {
+                    prompt: "consent",
+                },
+            },
+            httpOptions: {
+                timeout: 100000,
+            },
         }),
     ],
     callbacks: {
@@ -68,11 +68,11 @@ export const authOption: NextAuthOptions = {
 
     },
 
-    // pages: {
-    //     signIn: "/auth/login",
-    //     newUser: "/",
-    //     error: "/auth/error",
-    // },
+    pages: {
+        signIn: "/auth/login",
+        newUser: "/",
+        error: "/auth/error",
+    },
     session: {
         strategy: "jwt",
         maxAge: 60 * 60 * 24 * 10, // 10 days
