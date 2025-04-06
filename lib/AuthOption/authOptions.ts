@@ -2,24 +2,24 @@ import { NextAuthOptions } from "next-auth";
 
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOption:NextAuthOptions={
+export const authOption: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            authorization: {
-                params: {
-                    prompt: "consent",
-                },
-            },
-            httpOptions: {
-                timeout: 100000,
-            },
+            // authorization: {
+            //     params: {
+            //         prompt: "consent",
+            //     },
+            // },
+            // httpOptions: {
+            //     timeout: 100000,
+            // },
         }),
     ],
     callbacks: {
         async jwt({ token, user, session, account }) {
-            if(account){
+            if (account) {
 
                 const checkEmail = await fetch(`${process.env.SERVER_URL}/users/checkEmail`, {
                     method: "POST",
@@ -28,34 +28,34 @@ export const authOption:NextAuthOptions={
                     },
                     body: JSON.stringify({ email: user.email, name: user.name }),
                 });
-    
+
                 if (!checkEmail.ok) {
                     console.error("Email check failed", await checkEmail.text());
                     // throw new Error("Email check failed");
                     return token;
                 }
-    
+
                 const data = await checkEmail.json();
                 console.log("Email check success", data);
                 // return true;
-            
-                    token.user = {
-                        id: user.id,
-                        email: data.email,
-                        name: data.name!,
-                        image: user.image!,
-                    };
-    
-                    token.id = data.id;
-                    token.isAdmin = data.isAdmin;
 
-                    return token;
+                token.user = {
+                    id: user.id,
+                    email: data.email,
+                    name: data.name!,
+                    image: user.image!,
+                };
+
+                token.id = data.id;
+                token.isAdmin = data.isAdmin;
+
+                return token;
             }
             return token;
 
-            
 
-          
+
+
         },
 
         async session({ session, token }) {
@@ -65,22 +65,22 @@ export const authOption:NextAuthOptions={
             return session;
         },
 
-      
+
     },
 
-    pages: {
-        signIn: "/auth/login",
-        newUser: "/",
-        error: "/auth/error",
-      },
-      session: {
+    // pages: {
+    //     signIn: "/auth/login",
+    //     newUser: "/",
+    //     error: "/auth/error",
+    // },
+    session: {
         strategy: "jwt",
         maxAge: 60 * 60 * 24 * 10, // 10 days
-    
+
         // maxAge:10
-      },
-      jwt: {
+    },
+    jwt: {
         secret: process.env.NEXTAUTH_SECRET,
         // maxAge: 60 * 60 * 24 * 10, // 10 days
-      },
+    },
 }
