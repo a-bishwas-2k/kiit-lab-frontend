@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65200532/167247511-5b9af914-9c6e-4a3d-8b7e-e0f5c9b4b8e0.svg" width="600" alt="Cloud Coder Logo">
+</p>
 
-## Getting Started
+<h1 align="center">✨ KIIT Labs - Cloud Coder ✨</h1>
+<h3 align="center">The Serverless IDE Revolutionizing Coding Education</h3>
 
-First, run the development server:
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-14.2.3-000000?style=for-the-badge&logo=nextdotjs" alt="Next.js">
+  <img src="https://img.shields.io/badge/AWS_Lambda-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS Lambda">
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+  <img src="https://img.shields.io/badge/Judge0-5C2D91?style=for-the-badge&logo=codeigniter&logoColor=white" alt="Judge0">
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div align="center">
+  <a href="#demo">View Demo</a> •
+  <a href="#features">Features</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#team">Team</a>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌟 **Introduction**
+**Cloud Coder** is not just another IDE - it's a **serverless, collaborative coding platform** designed for the modern developer. Born at KIIT University, this project solves real problems faced by students and educators:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 🚫 No more local IDE setup headaches
+- 🌍 Accessible from any device with a browser
+- 👥 Real-time collaboration like Google Docs for code
+- ⚡ Blazing fast execution with serverless architecture
 
-## Learn More
+[![Watch Demo](https://img.shields.io/badge/🎥-Watch_Demo-red?style=for-the-badge&logo=youtube)](https://youtu.be/your-demo-link)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 **Key Features**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/65200532/167248933-1a1b1b2f-9f4a-4e8a-8f7e-5f3c3b3b3b3b.png" width="800" alt="Feature Showcase">
+</div>
 
-## Deploy on Vercel
+| Feature | Description | Tech Used |
+|---------|------------|-----------|
+| **💻 Multi-Language IDE** | Supports 50+ languages with syntax highlighting | Monaco Editor + Judge0 |
+| **👥 Live Collaboration** | Multiple users can edit simultaneously | WebSockets + OT Algorithms |
+| **🔐 Secure Authentication** | Google OAuth with role-based access | NextAuth.js |
+| **☁️ Serverless Backend** | Auto-scaling execution environment | AWS Lambda |
+| **📁 Smart File System** | Save, version, and share projects | MongoDB Atlas |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🛠️ **Tech Stack Architecture**
+
+```mermaid
+graph TD
+    A[Frontend] -->|Next.js| B[API Gateway]
+    B --> C[AWS Lambda]
+    C --> D[Judge0 API]
+    C --> E[MongoDB Atlas]
+    D --> F[DigitalOcean Droplet]
+    A --> G[Google OAuth]
