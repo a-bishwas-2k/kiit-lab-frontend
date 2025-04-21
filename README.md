@@ -34,7 +34,8 @@
 ## 🚀 **Key Features**
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/65200532/167248933-1a1b1b2f-9f4a-4e8a-8f7e-5f3c3b3b3b3b.png" width="800" alt="Feature Showcase">
+  <img src="https://img.icons8.com/clouds/800/000000/code.png" width="400" alt="Cloud Coder Logo">
+  <h3>✨ Cloud-Powered IDE Features ✨</h3>
 </div>
 
 | Feature | Description | Tech Used |
