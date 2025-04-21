@@ -8,7 +8,9 @@
   <a href="https://www.abhishekbishwas.com.np">
     <img src="https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
   </a>
-  ![KIIT University](https://img.shields.io/badge/KIIT_University-8A2BE2?style=for-the-badge&logo=academia&logoColor=white)
+  <a>
+    <img src="https://img.shields.io/badge/KIIT_University-8A2BE2?style=for-the-badge&logo=academia&logoColor=white" alt="KIIT">
+  </a>
 </p>
 
 <div align="center">
