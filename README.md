@@ -29,7 +29,7 @@
 - 👥 Real-time collaboration like Google Docs for code
 - ⚡ Blazing fast execution with serverless architecture
 
-[![Live Demo](https://img.shields.io/badge/🌐-Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.abhishekbishwas.com.np/)
+[![Live Demo](https://img.shields.io/badge/🌐-Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=red)](https://www.abhishekbishwas.com.np/)
 
 ## 🚀 **Key Features**
 
