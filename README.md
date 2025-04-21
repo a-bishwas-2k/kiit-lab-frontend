@@ -42,13 +42,10 @@
 
 ## 🛠 **Tech Stack**
 
-## 🛠 **Tech Stack**
-
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=nextjs,aws,nodejs,mongodb,git,vercel,digitalocean,figma,stackoverflow&theme=dark&perline=5" alt="Tech Stack Icons">
-  <br>
-  <img src="https://img.shields.io/badge/Judge0-F37626?style=for-the-badge&logo=codeigniter&logoColor=white" alt="Judge0" height="28">
+  <img src="https://skillicons.dev/icons?i=nextjs,aws,nodejs,mongodb,git,vercel,digitalocean,figma&theme=dark&perline=4" alt="Tech Stack Icons">
 </div>
+
 | Layer        | Technology                                                                 |
 |--------------|---------------------------------------------------------------------------|
 | **Frontend** | Next.js, Monaco Editor, Tailwind CSS                                      |
